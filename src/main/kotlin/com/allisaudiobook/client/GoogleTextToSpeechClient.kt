@@ -1,7 +1,7 @@
-package com.allisaudiobook.client.texttospeech
+package com.allisaudiobook.client
 
 import com.google.cloud.texttospeech.v1.AudioConfig
-import com.google.cloud.texttospeech.v1.AudioEncoding.MP3
+import com.google.cloud.texttospeech.v1.AudioEncoding
 import com.google.cloud.texttospeech.v1.SsmlVoiceGender.MALE
 import com.google.cloud.texttospeech.v1.SynthesisInput
 import com.google.cloud.texttospeech.v1.TextToSpeechClient
@@ -11,7 +11,12 @@ import java.io.FileOutputStream
 class GoogleTextToSpeechClient(
     val client: TextToSpeechClient,
 ) {
-    fun convertTextToSpeech(text: String, languageCode: String) {
+    fun convertTextToSpeech(
+        text: String,
+        languageCode: String,
+        nameFileOutput: String,
+        audioEncoding: AudioEncoding
+    ) {
         val input = SynthesisInput.newBuilder().setText(text).build()
         val voice = VoiceSelectionParams.newBuilder()
             .setLanguageCode(languageCode)
@@ -19,14 +24,14 @@ class GoogleTextToSpeechClient(
             .build()
 
         val audioConfig = AudioConfig.newBuilder()
-            .setAudioEncoding(MP3)
+            .setAudioEncoding(audioEncoding)
             .build()
 
         val response = client.synthesizeSpeech(input, voice, audioConfig)
 
         val audioContents = response.audioContent
 
-        val out = FileOutputStream("output.mp3")
+        val out = FileOutputStream("$nameFileOutput")
         out.write(audioContents.toByteArray())
 
     }

@@ -1,6 +1,6 @@
-package com.allisaudiobook.configuration
+package com.allisaudiobook.app.configuration
 
-import com.allisaudiobook.client.texttospeech.GoogleTextToSpeechClient
+import com.allisaudiobook.client.GoogleTextToSpeechClient
 import com.google.cloud.texttospeech.v1.TextToSpeechClient
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
