@@ -1,4 +1,4 @@
-package com.allisaudiobook.allisaudiobook
+package com.allisaudiobook
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
