@@ -9,13 +9,13 @@ import com.google.cloud.texttospeech.v1.VoiceSelectionParams
 import java.io.FileOutputStream
 
 class GoogleTextToSpeechClient(
-    val client: TextToSpeechClient,
+    private val client: TextToSpeechClient,
 ) {
     fun convertTextToSpeech(
         text: String,
         languageCode: String,
         nameFileOutput: String,
-        audioEncoding: AudioEncoding
+        audioEncoding: AudioEncoding,
     ) {
         val input = SynthesisInput.newBuilder().setText(text).build()
         val voice = VoiceSelectionParams.newBuilder()
